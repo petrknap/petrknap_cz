@@ -1,2 +1,6 @@
 application:
     scanDirs: false
+
+
+tracy:
+    email: dev@petrknap.cz
