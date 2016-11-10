@@ -1,0 +1,41 @@
+mount_project_to_web_server:
+  image: busybox:latest
+  volumes:
+    - .:/var/www/html
+
+db:
+  dockerfile: mysql.dockerfile
+  build: .docker
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: allowed
+  volume_driver: local
+  volumes:
+    - petrknap_cz__mysql:/var/lib/mysql
+  volumes_from:
+    - mount_project_to_web_server:ro
+
+mail:
+  image: mailhog/mailhog:latest
+  ports:
+    - 127.0.0.1:8025:8025
+
+pma:
+  image: phpmyadmin/phpmyadmin:latest
+  links:
+    - db:mysql.petrknap.dev
+  environment:
+    PMA_HOST: mysql.petrknap.dev
+    PMA_USER: root
+  ports:
+    - 127.0.0.1:8762:80
+
+web:
+  dockerfile: php.dockerfile
+  build: .docker
+  links:
+    - db:mysql.petrknap.dev
+    - mail:smtp.petrknap.dev
+  ports:
+    - 127.0.0.1:80:80
+  volumes_from:
+    - mount_project_to_web_server
