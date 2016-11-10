@@ -1,0 +1,43 @@
+{
+  "name": "petrknap/petrknap.cz",
+  "type": "project",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Petr Knap",
+      "email": "dev@petrknap.cz"
+    }
+  ],
+  "config": {
+    "platform": {
+      "php": "7.0",
+      "ext-dom": true
+    }
+  },
+  "require": {
+    "petrknap/nette-bootstrap": "^1.1",
+    "nette/application": "^2.4"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.8",
+    "tracy/tracy": "^2.4"
+  },
+  "autoload": {
+    "psr-4": {
+      "PetrKnap\\Web\\": "app/src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "PetrKnap\\Web\\Test\\": "tests/"
+    }
+  },
+  "scripts": {
+    "test": [
+      "make tests-run"
+    ],
+    "post-autoload-dump": [
+      "@test"
+    ]
+  }
+}
