@@ -4,9 +4,63 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0009a4e6c724eadf07b1237d73809582",
-    "content-hash": "7da34f36d31cbe9fa034d67c47afc00e",
+    "hash": "e593a4ceeddb6a46a7874734d35c5d08",
+    "content-hash": "e3447c4368aa221b03eb7dc17f748911",
     "packages": [
+        {
+            "name": "netpromotion/profiler",
+            "version": "v1.4.0-rc1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/netpromotion/profiler.git",
+                "reference": "6f11c316b94f6ad2c7349986afb3c89c8a7520b8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/netpromotion/profiler/zipball/6f11c316b94f6ad2c7349986afb3c89c8a7520b8",
+                "reference": "6f11c316b94f6ad2c7349986afb3c89c8a7520b8",
+                "shasum": ""
+            },
+            "require": {
+                "petrknap/php-profiler": "^1.1",
+                "petrknap/php-singleton": "^1.0",
+                "php": ">=5.4"
+            },
+            "conflict": {
+                "nette/di": "<2.2 || >=3",
+                "psr/log": "<1.0 || >= 2",
+                "tracy/tracy": "<2.2 || >=3"
+            },
+            "require-dev": {
+                "laravel/lumen-framework": "^5.0",
+                "latte/latte": "^2.3",
+                "netpromotion/tracy-wrapper": "^1.0",
+                "nette/application": "^2.3",
+                "nette/bootstrap": "^2.3",
+                "nette/di": "*",
+                "phpunit/phpunit": "^4.8",
+                "psr/log": "*",
+                "tracy/tracy": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Netpromotion\\Profiler\\": "src/Profiler"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Petr Knap",
+                    "email": "knap@netpromotion.cz"
+                }
+            ],
+            "description": "Profiler with adapter for Tracy",
+            "time": "2016-11-11 13:15:17"
+        },
         {
             "name": "nette/application",
             "version": "v2.4.2",
@@ -727,6 +781,88 @@
             "description": "Nette Bootstrap and Test-Case for PHPUnit",
             "homepage": "https://github.com/petrknap/nette-bootstrap",
             "time": "2016-11-07 16:12:07"
+        },
+        {
+            "name": "petrknap/php-profiler",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/petrknap/php-profiler.git",
+                "reference": "64e0cce681a8bb2976f6271da39b3fbf00bd899c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/petrknap/php-profiler/zipball/64e0cce681a8bb2976f6271da39b3fbf00bd899c",
+                "reference": "64e0cce681a8bb2976f6271da39b3fbf00bd899c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PetrKnap\\Php\\Profiler\\": "src/Profiler"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Petr Knap",
+                    "email": "dev@petrknap.cz",
+                    "homepage": "http://petrknap.cz"
+                }
+            ],
+            "description": "PHP profiler by Petr Knap",
+            "homepage": "https://github.com/petrknap/php-profiler",
+            "time": "2016-09-21 21:44:54"
+        },
+        {
+            "name": "petrknap/php-singleton",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/petrknap/php-singleton.git",
+                "reference": "dec131d0d6c72dd76b5a5c7940f04f14f5df7a20"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/petrknap/php-singleton/zipball/dec131d0d6c72dd76b5a5c7940f04f14f5df7a20",
+                "reference": "dec131d0d6c72dd76b5a5c7940f04f14f5df7a20",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PetrKnap\\Php\\Singleton\\": "src/Singleton"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Petr Knap",
+                    "email": "dev@petrknap.cz",
+                    "homepage": "http://petrknap.cz"
+                }
+            ],
+            "description": "Singleton pattern for PHP",
+            "homepage": "https://github.com/petrknap/php-singleton",
+            "time": "2016-09-22 07:59:18"
         },
         {
             "name": "tracy/tracy",
@@ -1897,9 +2033,18 @@
             "time": "2016-08-09 15:02:57"
         }
     ],
-    "aliases": [],
+    "aliases": [
+        {
+            "alias": "1.4",
+            "alias_normalized": "1.4.0.0",
+            "version": "1.4.0.0-RC1",
+            "package": "netpromotion/profiler"
+        }
+    ],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "netpromotion/profiler": 5
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
