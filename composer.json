@@ -17,7 +17,7 @@
   },
   "require": {
     "netpromotion/profiler": "1.4.0-rc1 as 1.4",
-    "petrknap/nette-bootstrap": "^1.1",
+    "petrknap/nette-bootstrap": "^1.2",
     "nette/application": "^2.4",
     "nette/caching": "^2.5",
     "tracy/tracy": "^2.4",

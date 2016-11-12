@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a817ea1c2d049009f4de4007792becb5",
-    "content-hash": "60bd4c500990d022960541dfc891bc41",
+    "hash": "ea0f01973ea041c6394ccb1c6e682f4a",
+    "content-hash": "4581941265a74e4849b83758994103b9",
     "packages": [
         {
             "name": "curl/curl",
@@ -789,16 +789,16 @@
         },
         {
             "name": "petrknap/nette-bootstrap",
-            "version": "v1.1.0",
+            "version": "v1.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/petrknap/nette-bootstrap.git",
-                "reference": "23c5a030570fe7551daef66ccc3b47f8f3cb229e"
+                "reference": "a57422c3a67a69ace9d73875a87ff74eaf4b7ca8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/petrknap/nette-bootstrap/zipball/23c5a030570fe7551daef66ccc3b47f8f3cb229e",
-                "reference": "23c5a030570fe7551daef66ccc3b47f8f3cb229e",
+                "url": "https://api.github.com/repos/petrknap/nette-bootstrap/zipball/a57422c3a67a69ace9d73875a87ff74eaf4b7ca8",
+                "reference": "a57422c3a67a69ace9d73875a87ff74eaf4b7ca8",
                 "shasum": ""
             },
             "require": {
@@ -835,7 +835,7 @@
             ],
             "description": "Nette Bootstrap and Test-Case for PHPUnit",
             "homepage": "https://github.com/petrknap/nette-bootstrap",
-            "time": "2016-11-07 16:12:07"
+            "time": "2016-11-12 11:06:53"
         },
         {
             "name": "petrknap/php-profiler",
