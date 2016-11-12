@@ -11,11 +11,19 @@ class Bootstrap extends Nette\Bootstrap\Bootstrap
     const TEMP_DIR = self::APP_DIR . "/../temp";
 
     /**
+     * @return bool
+     */
+    public static function isProduction()
+    {
+        return !isset($_SERVER["SERVER_NAME"]) ?: strpos($_SERVER["SERVER_NAME"], ".dev") === false;
+    }
+
+    /**
      * @inheritdoc
      */
     protected function getDebugMode()
     {
-        return strpos($_SERVER["SERVER_NAME"], ".dev") !== false;
+        return !self::isProduction();
     }
 
     /**
