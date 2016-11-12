@@ -2,5 +2,14 @@ application:
     scanDirs: false
 
 
+extensions:
+    profiler: Netpromotion\Profiler\Extension\ProfilerNetteExtension
+
+
+profiler:
+    profile:
+        createService: true
+
+
 tracy:
     email: dev@petrknap.cz
