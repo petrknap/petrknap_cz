@@ -4,9 +4,64 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "f4e137b9aa13570dc4c413af5a660bf9",
-    "content-hash": "c65117e9c565bddafc01af8fdfbb563f",
+    "hash": "a817ea1c2d049009f4de4007792becb5",
+    "content-hash": "60bd4c500990d022960541dfc891bc41",
     "packages": [
+        {
+            "name": "curl/curl",
+            "version": "1.5.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/php-mod/curl.git",
+                "reference": "7865e81196569c159fb5f30a17cb6c47faccc0c4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/php-mod/curl/zipball/7865e81196569c159fb5f30a17cb6c47faccc0c4",
+                "reference": "7865e81196569c159fb5f30a17cb6c47faccc0c4",
+                "shasum": ""
+            },
+            "require": {
+                "ext-curl": "*",
+                "php": ">=5.3.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*",
+                "squizlabs/php_codesniffer": "~2.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "Curl": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Hassan Amouhzi",
+                    "email": "hassan@anezi.net",
+                    "homepage": "http://hassan.amouhzi.com"
+                },
+                {
+                    "name": "php-curl-class",
+                    "homepage": "https://github.com/php-curl-class"
+                },
+                {
+                    "name": "user52",
+                    "homepage": "https://github.com/user52"
+                }
+            ],
+            "description": "cURL class for PHP",
+            "homepage": "https://github.com/php-mod/curl",
+            "keywords": [
+                "curl",
+                "dot"
+            ],
+            "time": "2016-10-20 18:16:32"
+        },
         {
             "name": "netpromotion/profiler",
             "version": "v1.4.0-rc1",
@@ -2051,6 +2106,7 @@
     "platform-dev": [],
     "platform-overrides": {
         "php": "7.0",
-        "ext-dom": true
+        "ext-dom": true,
+        "ext-curl": true
     }
 }
