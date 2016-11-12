@@ -56,7 +56,8 @@ class Bootstrap extends Nette\Bootstrap\Bootstrap
     protected function getConfigFiles()
     {
         return [
-            self::APP_DIR . "/config/config.neon"
+            self::APP_DIR . "/config/config.neon",
+            self::APP_DIR . "/config/config.local.neon"
         ];
     }
 }
