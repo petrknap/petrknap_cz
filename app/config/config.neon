@@ -5,6 +5,9 @@ parameters:
         connectionTimeOut: 5000
         followLocation: true
         cookieFile: %appDir%/../temp/cookies.txt
+    reverseProxy:
+        cache:
+            expire: 24 hours
 
 
 application:
@@ -26,3 +29,4 @@ tracy:
 
 services:
     - PetrKnap\Web\Common\CurlFactory(%curl%)
+    - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
