@@ -12,6 +12,8 @@ parameters:
 
 application:
     scanDirs: false
+    mapping:
+        *: PetrKnap\Web\*Module\Presenter\*Presenter
 
 
 extensions:
@@ -30,3 +32,4 @@ tracy:
 services:
     - PetrKnap\Web\Common\CurlFactory(%curl%)
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
+    router: PetrKnap\Web\RouterFactory::createRouter("https://petrknap.github.io/index_cz.html")
