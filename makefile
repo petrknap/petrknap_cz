@@ -1,16 +1,28 @@
-all: docker-stop permission-update temp-clear docker-build
+all: docker-stop permission-update temp-clear docker-build composer-install
+
+composer-install:
+	composer install
 
 permission-update:
 	CURRENT_USER=$$USER && \
 	sudo find .                              -exec chown $$CURRENT_USER {} \;
 	sudo find .      -not -path "*/vendor/*" -type d -exec chmod 755 {} \;
 	sudo find .      -not -path "*/vendor/*" -type f -exec chmod 644 {} \;
+	sudo find ./log                          -type d -exec chmod 777 {} \;
+	sudo find ./log                          -type f -exec chmod 666 {} \;
 	sudo find ./temp                         -type d -exec chmod 777 {} \;
 	sudo find ./temp                         -type f -exec chmod 666 {} \;
 
 temp-clear:
 	sudo rm -rf ./temp
 	git checkout -- ./temp
+	make permission-update
+
+tests-run:
+	make permission-update
+	make docker-stop
+	sudo docker-compose run --rm web php ./vendor/bin/phpunit
+	make docker-stop
 	make permission-update
 
 docker-build:

@@ -1,0 +1,35 @@
+parameters:
+    curl:
+        userAgent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0"
+        referrer: "" # HTTPS referrer (f.e. google)
+        connectionTimeOut: 5000
+        followLocation: true
+        cookieFile: %appDir%/../temp/cookies.txt
+    reverseProxy:
+        cache:
+            expire: 24 hours
+
+
+application:
+    scanDirs: false
+    mapping:
+        *: PetrKnap\Web\*Module\Presenter\*Presenter
+
+
+extensions:
+    profiler: Netpromotion\Profiler\Extension\ProfilerNetteExtension
+
+
+profiler:
+    profile:
+        createService: true
+
+
+tracy:
+    email: dev@petrknap.cz
+
+
+services:
+    - PetrKnap\Web\Common\CurlFactory(%curl%)
+    - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
+    router: PetrKnap\Web\RouterFactory::createRouter("https://petrknap.github.io/index_cz.html")
