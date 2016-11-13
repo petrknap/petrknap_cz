@@ -32,4 +32,4 @@ tracy:
 services:
     - PetrKnap\Web\Common\CurlFactory(%curl%)
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
-    router: PetrKnap\Web\RouterFactory::createRouter("https://petrknap.github.io/index_cz.html")
+    router: PetrKnap\Web\RouterFactory::createRouter("https://petrknap.github.io/index_cz.html", "petrknap")
