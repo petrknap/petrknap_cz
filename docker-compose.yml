@@ -29,19 +29,12 @@ pma:
   ports:
     - 127.0.0.1:8762:80
 
-ftp:
-  dockerfile: ftp.dockerfile
-  build: .docker
-  volumes:
-    - ./temp/ftp:/home/ftpusers/root
-
 web:
   dockerfile: php.dockerfile
   build: .docker
   links:
     - db:mysql.petrknap.dev
     - mail:smtp.petrknap.dev
-    - ftp:ftp.petrknap.dev
   ports:
     - 127.0.0.1:80:80
   volumes_from:
