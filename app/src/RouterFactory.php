@@ -10,13 +10,17 @@ class RouterFactory
 {
     /**
      * @param string $homepage
+     * @param string $primarySecondLevelDomain
      * @return IRouter
      */
-    public static function createRouter($homepage)
+    public static function createRouter($homepage, $primarySecondLevelDomain)
     {
+        $protocol = Bootstrap::isProduction() ? "https://" : "http://";
+        $protocol .= "[test.%sld%.%tld%/]"; // enable test sub-domain
+
         $router = new RouteList();
 
-        $router[] = new Route((Bootstrap::isProduction() ? "https://" : "http://") . "%sld%.%tld%/", [
+        $router[] = new Route("{$protocol}{$primarySecondLevelDomain}.%tld%/", [
             "presenter" => "ReverseProxy",
             "action" => "default",
             "url" => $homepage

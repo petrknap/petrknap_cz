@@ -1,3 +1,4 @@
 /.idea/
 /app/config/config.local.neon
 /tests/phpunit.log
+/.htdeployment

@@ -41,3 +41,11 @@ docker-run:
 docker-stop:
 	sudo docker-compose stop
 	sudo docker stop $$(sudo docker ps -a -q) || true
+
+deployment: temp-clear
+	make permission-update
+	make docker-stop
+	sudo docker-compose up -d
+	sudo docker-compose run web bash ./deployment.php
+	make docker-stop
+	make permission-update

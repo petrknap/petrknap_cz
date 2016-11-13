@@ -23,7 +23,7 @@ class Bootstrap extends Nette\Bootstrap\Bootstrap
      */
     protected function getDebugMode()
     {
-        return !self::isProduction();
+        return !static::isProduction();
     }
 
     /**
