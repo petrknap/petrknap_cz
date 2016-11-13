@@ -1,0 +1,8 @@
+parameters:
+    deployment:
+        type: ftp
+        user: null
+        pass: null
+        host: ftp.petrknap.cz
+        path: /
+        after: []
