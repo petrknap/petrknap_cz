@@ -21,7 +21,8 @@
     "nette/application": "^2.4",
     "nette/caching": "^2.5",
     "tracy/tracy": "^2.4",
-    "curl/curl": "^1.5"
+    "curl/curl": "^1.5",
+    "petrknap/php-migrationtool": "^1.0"
   },
   "require-dev": {
     "phpunit/phpunit": "^4.8",

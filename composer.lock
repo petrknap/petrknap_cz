@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c857b280376a56687496a181471f070b",
-    "content-hash": "f43d48a6fe7d3b9e93fb374accc280be",
+    "hash": "64746d6aeb9d19d2390788525668e6bf",
+    "content-hash": "5525c77273dc1f0e0cfe802527c4c48f",
     "packages": [
         {
             "name": "curl/curl",
@@ -836,6 +836,49 @@
             "description": "Nette Bootstrap and Test-Case for PHPUnit",
             "homepage": "https://github.com/petrknap/nette-bootstrap",
             "time": "2016-11-12 11:06:53"
+        },
+        {
+            "name": "petrknap/php-migrationtool",
+            "version": "v1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/petrknap/php-migrationtool.git",
+                "reference": "250cd316080a887f978aaef07edbd2822940c15d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/petrknap/php-migrationtool/zipball/250cd316080a887f978aaef07edbd2822940c15d",
+                "reference": "250cd316080a887f978aaef07edbd2822940c15d",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.8"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "PetrKnap\\Php\\MigrationTool\\": "src/MigrationTool",
+                    "PetrKnap\\Php\\MigrationTool\\Test\\": "tests/MigrationTool"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Petr Knap",
+                    "email": "dev@petrknap.cz",
+                    "homepage": "http://petrknap.cz",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Migration tool for PHP",
+            "homepage": "https://github.com/petrknap/php-migrationtool",
+            "time": "2016-06-25 09:49:10"
         },
         {
             "name": "petrknap/php-profiler",
