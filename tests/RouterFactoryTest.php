@@ -9,7 +9,7 @@ class RouterFactoryTest extends NetteTestCase
 {
     public function testCreatesIRouterInstance()
     {
-        $router = RouterFactory::createRouter(null);
+        $router = RouterFactory::createRouter(null, null);
 
         $this->assertInstanceOf(IRouter::class, $router);
     }
