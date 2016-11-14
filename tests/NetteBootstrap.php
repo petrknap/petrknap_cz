@@ -11,7 +11,7 @@ class NetteBootstrap extends Bootstrap
      */
     public static function isProduction()
     {
-        return false;
+        return true;
     }
 
     /**
