@@ -5,4 +5,5 @@ parameters:
         pass: null
         host: ftp.petrknap.cz
         path: /
-        after: []
+        after:
+            - "http://api.petrknap.cz/migrate/?sk=%secretKey%"

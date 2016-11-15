@@ -20,6 +20,9 @@ class RouterFactory
 
         $router = new RouteList();
 
+        $router[] = new Route("{$protocol}api.%sld%.%tld%/<action>/?sk=<secret_key>", [
+            "presenter" => "Api"
+        ]);
         $router[] = new Route("{$protocol}{$primarySecondLevelDomain}.%tld%/", [
             "presenter" => "ReverseProxy",
             "action" => "default",
