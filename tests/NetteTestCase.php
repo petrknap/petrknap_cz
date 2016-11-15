@@ -3,6 +3,7 @@
 namespace PetrKnap\Web\Test;
 
 use PetrKnap\Nette\Bootstrap\PhpUnit;
+use PetrKnap\Web\Service\MigrationService;
 
 class NetteTestCase extends PhpUnit\NetteTestCase
 {
@@ -14,5 +15,15 @@ class NetteTestCase extends PhpUnit\NetteTestCase
     protected function clearTempExcludedFiles()
     {
         return [".gitignore", ".htaccess"];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        self::getContainer()->getByType(MigrationService::class)->migrate();
     }
 }
