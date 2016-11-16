@@ -16,7 +16,6 @@ class RouterFactory
     public static function createRouter($homepage, $primarySecondLevelDomain)
     {
         $protocol = Bootstrap::isProduction() ? "https://" : "http://";
-        $protocol .= "[test.%sld%.%tld%/]"; // enable test sub-domain
 
         $router = new RouteList();
 
