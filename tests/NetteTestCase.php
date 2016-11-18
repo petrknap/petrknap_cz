@@ -2,6 +2,7 @@
 
 namespace PetrKnap\Web\Test;
 
+use Nette\Database\Connection;
 use PetrKnap\Nette\Bootstrap\PhpUnit;
 use PetrKnap\Web\Service\MigrationService;
 
@@ -25,5 +26,20 @@ class NetteTestCase extends PhpUnit\NetteTestCase
         parent::setUp();
 
         self::getContainer()->getByType(MigrationService::class)->migrate();
+    }
+
+    /**
+     * @return Connection
+     */
+    protected function getDatabaseConnection()
+    {
+        static $databaseConnection;
+
+        if (!$databaseConnection) {
+            $databaseConnection = self::getContainer()->getByType(Connection::class);
+            (new MigrationService($databaseConnection))->migrate();
+        }
+
+        return $databaseConnection;
     }
 }
