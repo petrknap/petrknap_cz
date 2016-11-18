@@ -38,8 +38,18 @@ class NetteTestCase extends PhpUnit\NetteTestCase
         if (!$databaseConnection) {
             $databaseConnection = self::getContainer()->getByType(Connection::class);
             (new MigrationService($databaseConnection))->migrate();
+            $this->fillDatabase($databaseConnection);
         }
 
         return $databaseConnection;
+    }
+
+    /**
+     * @param Connection $connection
+     * @return void
+     */
+    protected function fillDatabase(/** @noinspection PhpUnusedParameterInspection */ $connection)
+    {
+        return /* void */;
     }
 }
