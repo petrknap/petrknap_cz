@@ -13,6 +13,29 @@ class NetteTestCase extends PhpUnit\NetteTestCase
     /**
      * @inheritdoc
      */
+    public static function setUpBeforeClass()
+    {
+        parent::setUpBeforeClass();
+
+        self::getContainer()->addService(
+            Connection::class,
+            (new static())->getDatabaseConnection()
+        );
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function setUp()
+    {
+        parent::setUp();
+
+        $this->refillDatabase($this->getDatabaseConnection());
+    }
+    
+    /**
+     * @inheritdoc
+     */
     protected function clearTempExcludedFiles()
     {
         return [".gitignore", ".htaccess"];
@@ -28,7 +51,7 @@ class NetteTestCase extends PhpUnit\NetteTestCase
         if (!$databaseConnection) {
             $databaseConnection = self::getContainer()->getByType(Connection::class);
             (new MigrationService($databaseConnection))->migrate();
-            $this->fillDatabase($databaseConnection);
+            $this->refillDatabase($databaseConnection);
         }
 
         return $databaseConnection;
@@ -38,7 +61,7 @@ class NetteTestCase extends PhpUnit\NetteTestCase
      * @param Connection $connection
      * @return void
      */
-    protected function fillDatabase(/** @noinspection PhpUnusedParameterInspection */ $connection)
+    protected function refillDatabase(/** @noinspection PhpUnusedParameterInspection */$connection)
     {
         return /* void */;
     }
