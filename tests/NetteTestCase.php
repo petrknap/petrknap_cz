@@ -19,16 +19,6 @@ class NetteTestCase extends PhpUnit\NetteTestCase
     }
 
     /**
-     * @inheritdoc
-     */
-    public function setUp()
-    {
-        parent::setUp();
-
-        self::getContainer()->getByType(MigrationService::class)->migrate();
-    }
-
-    /**
      * @return Connection
      */
     protected function getDatabaseConnection()
