@@ -1,4 +1,6 @@
 parameters:
     secretKey: test
     database:
-        dsn: "sqlite::memory:"
+        dsn: "mysql:host=mysql.petrknap.test;dbname=petrknap_cz"
+        username: root
+        password: ""

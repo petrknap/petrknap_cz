@@ -8,11 +8,19 @@ db:
   build: .docker
   environment:
     MYSQL_ALLOW_EMPTY_PASSWORD: allowed
+    MYSQL_DATABASE: petrknap_cz
   volume_driver: local
   volumes:
     - petrknap_cz__mysql:/var/lib/mysql
   volumes_from:
     - mount_project_to_web_server:ro
+
+db_test:
+  dockerfile: mysql.dockerfile
+  build: .docker
+  environment:
+    MYSQL_ALLOW_EMPTY_PASSWORD: allowed
+    MYSQL_DATABASE: petrknap_cz
 
 mail:
   image: mailhog/mailhog:latest
@@ -34,6 +42,7 @@ web:
   build: .docker
   links:
     - db:mysql.petrknap.dev
+    - db_test:mysql.petrknap.test
     - mail:smtp.petrknap.dev
   ports:
     - 127.0.0.1:80:80

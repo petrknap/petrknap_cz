@@ -48,4 +48,5 @@ services:
     - PetrKnap\Web\Common\CurlFactory(%curl%)
     - PetrKnap\Web\Service\MigrationService
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
+    - PetrKnap\Web\Service\UrlLookupService
     router: PetrKnap\Web\RouterFactory::createRouter("https://petrknap.github.io/index_cz.html", "petrknap")
