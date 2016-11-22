@@ -9,11 +9,10 @@ use Nette\Application\Routers\RouteList;
 class RouterFactory
 {
     /**
-     * @param string $homepage
      * @param string $primarySecondLevelDomain
      * @return IRouter
      */
-    public static function createRouter($homepage, $primarySecondLevelDomain)
+    public static function createRouter($primarySecondLevelDomain)
     {
         $protocol = Bootstrap::isProduction() ? "https://" : "http://";
 
@@ -22,10 +21,17 @@ class RouterFactory
         $router[] = new Route("{$protocol}api.%sld%.%tld%/<action>/?sk=<secret_key>", [
             "presenter" => "Api"
         ]);
+        $router[] = new Route("{$protocol}link.%sld%.%tld%/to/<keyword>", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
+        $router[] = new Route("{$protocol}%sld%.link/to/<keyword>", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
         $router[] = new Route("{$protocol}{$primarySecondLevelDomain}.%tld%/", [
             "presenter" => "ReverseProxy",
-            "action" => "default",
-            "url" => $homepage
+            "action" => "homepage"
         ]);
 
         return $router;

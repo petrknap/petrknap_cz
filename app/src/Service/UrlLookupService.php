@@ -2,8 +2,9 @@
 
 namespace PetrKnap\Web\Service;
 
+use Netpromotion\Profiler\Profiler;
 use Nette\Database\Context;
-use Nette\Http\Request;
+use Nette\Http\IRequest;
 use PetrKnap\Web\Service\Exception\UrlLookupException\NotFoundException;
 
 class UrlLookupService
@@ -25,27 +26,31 @@ class UrlLookupService
      */
     public function getRecordByKeyword($keyword)
     {
+        Profiler::start("UrlLookupService::getRecordByKeyword('%s')", $keyword);
         /** @noinspection SqlDialectInspection, SqlNoDataSourceInspection */
         $result = $this->database->query(
             "SELECT * FROM url_lookup__records WHERE keyword = ? LIMIT 1",
             $keyword
         )->fetch();
         if ($result === false) {
+            Profiler::finish("UrlLookupService::getRecordByKeyword('%s')", $keyword);
             throw new NotFoundException(sprintf(
                 "Result for keyword = '%s' not found",
                 $keyword
             ));
         }
+        Profiler::finish("UrlLookupService::getRecordByKeyword('%s')", $keyword);
         return new UrlLookupRecord($result);
     }
 
     /**
      * @param string $keyword
-     * @param Request $request
+     * @param IRequest $request
      * @throws NotFoundException
      */
-    public function touchKeyword($keyword, Request $request)
+    public function touchKeyword($keyword, IRequest $request)
     {
+        Profiler::start("UrlLookupService::touchKeyword('%s',...)", $keyword);
         /** @noinspection SqlDialectInspection, SqlNoDataSourceInspection */
         $mapId = $this->database->query(
             "SELECT id FROM url_lookup__keyword_to_url_map WHERE keyword = ? LIMIT 1",
@@ -53,6 +58,7 @@ class UrlLookupService
         )->fetchField(0);
 
         if ($mapId === false) {
+            Profiler::finish("UrlLookupService::touchKeyword('%s',...)", $keyword);
             throw new NotFoundException(sprintf(
                 "Map for keyword = '%s' not found",
                 $keyword
@@ -74,8 +80,9 @@ class UrlLookupService
             $mapId,
             $request->getHeader("User-Agent"),
             $request->getRemoteAddress(),
-            $request->getReferer()
+            $request->getHeader("HTTP_REFERER")
         );
         $this->database->commit();
+        Profiler::finish("UrlLookupService::touchKeyword('%s',...)", $keyword);
     }
 }

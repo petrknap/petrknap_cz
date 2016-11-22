@@ -8,7 +8,9 @@ use Nette\Application\Responses\CallbackResponse;
 use Nette\Application\UI\Presenter;
 use Nette\Http\IResponse;
 use Nette\Http\Response;
+use PetrKnap\Web\Service\Exception\UrlLookupException;
 use PetrKnap\Web\Service\ReverseProxyService;
+use PetrKnap\Web\Service\UrlLookupService;
 
 class ReverseProxyPresenter extends Presenter
 {
@@ -18,15 +20,30 @@ class ReverseProxyPresenter extends Presenter
      */
     public $reverseProxyService;
 
-    public function renderDefault()
+    /**
+     * @inject
+     * @var UrlLookupService
+     */
+    public $urlLookupService;
+
+    public function renderHomepage()
     {
-        $url = $this->getParameter("url");
-        $isRedirect = $this->getParameter("is_redirect");
+        $this->doResponse($this->context->getParameters()["homepage"], false);
+    }
 
-        if (empty($url)) {
-            throw new BadRequestException();
+    public function renderByKeyword($keyword)
+    {
+        try {
+            $this->urlLookupService->touchKeyword($keyword, $this->getHttpRequest());
+            $record = $this->urlLookupService->getRecordByKeyword($keyword);
+            $this->doResponse($record->getUrl(), !$record->isProxy());
+        } catch (UrlLookupException $e) {
+            throw new BadRequestException($e->getMessage());
         }
+    }
 
+    private function doResponse($url, $isRedirect)
+    {
         /** @noinspection PhpUnusedParameterInspection */
         $this->sendResponse(new CallbackResponse(function ($unused, Response $response) use ($url, $isRedirect) {
             Profiler::start("ReverseProxyPresenter::renderDefault('%s', %d)->sendResponse(...)", $url, $isRedirect);

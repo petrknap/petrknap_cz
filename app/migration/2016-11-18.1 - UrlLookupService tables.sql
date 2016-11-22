@@ -15,13 +15,12 @@ CREATE TABLE url_lookup__user_agents (
 ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;
 
 CREATE TABLE url_lookup__keyword_statistics (
-  id INT AUTO_INCREMENT NOT NULL,
   keyword_to_url_map_id INT NOT NULL,
   hashed_user_agent BINARY(28) NULL COMMENT 'use UNHEX(SHA2(input, 224))',
   address INT UNSIGNED NULL COMMENT 'use INET_ATON/INET_NTOA',
   referrer VARCHAR(2048) NULL,
   touches INT NOT NULL DEFAULT 1,
-  PRIMARY KEY(id),
+  created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
   FOREIGN KEY (keyword_to_url_map_id) REFERENCES url_lookup__keyword_to_url_map(id)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
@@ -36,5 +35,3 @@ CREATE VIEW url_lookup__records AS
   FROM url_lookup__keyword_to_url_map k2um
   LEFT JOIN url_lookup__keyword_statistics ks ON ks.keyword_to_url_map_id = k2um.id
   GROUP BY k2um.id;
-
--- TODO create view url_lookup__statistics

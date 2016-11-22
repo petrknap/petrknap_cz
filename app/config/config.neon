@@ -1,5 +1,6 @@
 parameters:
     secretKey: null
+    homepage: https://petrknap.github.io/index_cz.html
     curl:
         userAgent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0"
         referrer: "" # HTTPS referrer (f.e. google)
@@ -49,4 +50,4 @@ services:
     - PetrKnap\Web\Service\MigrationService
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
     - PetrKnap\Web\Service\UrlLookupService
-    router: PetrKnap\Web\RouterFactory::createRouter("https://petrknap.github.io/index_cz.html", "petrknap")
+    router: PetrKnap\Web\RouterFactory::createRouter("petrknap")

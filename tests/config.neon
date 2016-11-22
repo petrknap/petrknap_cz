@@ -1,5 +1,6 @@
 parameters:
     secretKey: test
+    homepage: http://httpbin.org/html
     database:
         dsn: "mysql:host=mysql.petrknap.test;dbname=petrknap_cz"
         username: root
