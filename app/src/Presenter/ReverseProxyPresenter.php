@@ -31,8 +31,12 @@ class ReverseProxyPresenter extends Presenter
         $this->doResponse($this->context->getParameters()["homepage"], false);
     }
 
-    public function renderByKeyword($keyword)
+    public function renderByKeyword($keyword, $extension)
     {
+        if ($extension) {
+            $keyword .= ".{$extension}";
+        }
+
         try {
             $this->urlLookupService->touchKeyword($keyword, $this->getHttpRequest());
             $record = $this->urlLookupService->getRecordByKeyword($keyword);

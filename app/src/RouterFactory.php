@@ -21,11 +21,19 @@ class RouterFactory
         $router[] = new Route("{$protocol}api.%sld%.%tld%/<action>/?sk=<secret_key>", [
             "presenter" => "Api"
         ]);
-        $router[] = new Route("{$protocol}link.%sld%.%tld%/to/<keyword>", [
+        $router[] = new Route("{$protocol}link.%sld%.%tld%/to/<keyword .*>.<extension [^/]*>", [
             "presenter" => "ReverseProxy",
             "action" => "byKeyword"
         ]);
-        $router[] = new Route("{$protocol}%sld%.link/to/<keyword>", [
+        $router[] = new Route("{$protocol}link.%sld%.%tld%/to/<keyword .*>/", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
+        $router[] = new Route("{$protocol}%sld%.link/to/<keyword .*>.<extension [^/]*>", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
+        $router[] = new Route("{$protocol}%sld%.link/to/<keyword .*>/", [
             "presenter" => "ReverseProxy",
             "action" => "byKeyword"
         ]);
