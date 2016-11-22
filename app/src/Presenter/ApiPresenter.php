@@ -5,12 +5,19 @@ namespace PetrKnap\Web\Presenter;
 use Nette\Application\BadRequestException;
 use Nette\Application\UI\Presenter;
 use Nette\Http\IResponse;
+use PetrKnap\Web\Service\CronService;
 use PetrKnap\Web\Service\MigrationService;
 
 class ApiPresenter extends Presenter
 {
     const MESSAGE_OK = "OK";
     const MESSAGE_WRONG_KEY = "Wrong secret key.";
+
+    /**
+     * @inject
+     * @var CronService
+     */
+    public $cronService;
 
     /**
      * @inject
@@ -33,6 +40,11 @@ class ApiPresenter extends Presenter
         $this->getHttpResponse()->setContentType("text/plain");
         echo self::MESSAGE_OK;
         $this->terminate();
+    }
+
+    public function actionCron()
+    {
+        $this->cronService->run(new \DateTime());
     }
 
     public function actionMigrate()

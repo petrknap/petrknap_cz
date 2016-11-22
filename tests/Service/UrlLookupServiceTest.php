@@ -94,6 +94,7 @@ class UrlLookupServiceTest extends NetteTestCase
         }
 
         $this->getService()->touchKeyword($keyword, $request);
+        $this->getService()->persistTouches();
 
         $this->assertEquals($expectedTouches, $this->getService()->getRecordByKeyword($keyword)->getTouches());
     }

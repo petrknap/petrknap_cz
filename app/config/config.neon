@@ -7,6 +7,11 @@ parameters:
         connectionTimeOut: 5000
         followLocation: true
         cookieFile: %appDir%/../temp/cookies.txt
+    cron:
+        -
+            class: PetrKnap\Web\Service\UrlLookupService
+            method: persistTouches
+            hours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
     database:
         dsn: null
         username: null
@@ -39,7 +44,9 @@ database:
 profiler:
     profile:
         createService: true
-
+    bar:
+        show:
+            shortProfiles: false
 
 tracy:
     email: dev@petrknap.cz
@@ -47,6 +54,7 @@ tracy:
 
 services:
     - PetrKnap\Web\Common\CurlFactory(%curl%)
+    - PetrKnap\Web\Service\CronService(%cron%)
     - PetrKnap\Web\Service\MigrationService
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
     - PetrKnap\Web\Service\UrlLookupService

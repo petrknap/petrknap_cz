@@ -75,7 +75,7 @@ class UrlLookupService
         );
         /** @noinspection SqlDialectInspection, SqlNoDataSourceInspection */
         $this->database->query(
-            "INSERT INTO url_lookup__keyword_statistics (keyword_to_url_map_id, hashed_user_agent, address, referrer)
+            "INSERT INTO memory__url_lookup__keyword_statistics (keyword_to_url_map_id, hashed_user_agent, address, referrer)
               VALUES (?, UNHEX(SHA2(?, 224)), INET_ATON(?), ?)",
             $mapId,
             $request->getHeader("User-Agent"),
@@ -84,5 +84,40 @@ class UrlLookupService
         );
         $this->database->commit();
         Profiler::finish("UrlLookupService::touchKeyword('%s',...)", $keyword);
+    }
+
+    public function persistTouches()
+    {
+        $this->database->beginTransaction();
+        /** @noinspection SqlDialectInspection, SqlNoDataSourceInspection */
+        foreach ($this->database->query("SELECT
+                                          keyword_to_url_map_id,
+                                          HEX(hashed_user_agent) AS hashed_user_agent,
+                                          address,
+                                          referrer,
+                                          touches,
+                                          created_at
+                                        FROM memory__url_lookup__keyword_statistics")->fetchAll() as $row) {
+            /** @noinspection SqlDialectInspection, SqlNoDataSourceInspection */
+            $this->database->query(
+                "INSERT INTO url_lookup__keyword_statistics (
+                  keyword_to_url_map_id,
+                  hashed_user_agent,
+                  address,
+                  referrer,
+                  touches,
+                  created_at
+                 ) VALUES (?, UNHEX(?), ?, ?, ?, ?)",
+                $row["keyword_to_url_map_id"],
+                $row["hashed_user_agent"],
+                $row["address"],
+                $row["referrer"],
+                $row["touches"],
+                $row["created_at"]
+            );
+        }
+        /** @noinspection SqlDialectInspection, SqlNoDataSourceInspection */
+        $this->database->query("DELETE FROM memory__url_lookup__keyword_statistics");
+        $this->database->commit();
     }
 }
