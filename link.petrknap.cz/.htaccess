@@ -1,1 +1,1 @@
-../.htaccess.public
+ErrorDocument 404 /index.php
