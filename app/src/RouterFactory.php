@@ -29,11 +29,11 @@ class RouterFactory
             "presenter" => "ReverseProxy",
             "action" => "byKeyword"
         ]);
-        $router[] = new Route("{$protocol}%sld%.link/to/<keyword .*>.<extension [^/]*>", [
+        $router[] = new Route("http://%sld%.link/to/<keyword .*>.<extension [^/]*>", [
             "presenter" => "ReverseProxy",
             "action" => "byKeyword"
         ]);
-        $router[] = new Route("{$protocol}%sld%.link/to/<keyword .*>/", [
+        $router[] = new Route("http://%sld%.link/to/<keyword .*>/", [
             "presenter" => "ReverseProxy",
             "action" => "byKeyword"
         ]);
