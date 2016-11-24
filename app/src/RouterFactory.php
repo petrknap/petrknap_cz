@@ -18,8 +18,9 @@ class RouterFactory
 
         $router = new RouteList();
 
-        $router[] = new Route("{$protocol}api.{$domains["primary"]}/<action>/?sk=<secret_key>", [
-            "presenter" => "Api"
+        $router[] = new Route("{$protocol}{$domains["primary"]}/", [
+            "presenter" => "ReverseProxy",
+            "action" => "homepage"
         ]);
         $router[] = new Route("http://{$domains["link"]}/to/<keyword .*>.<extension [^/]*>", [
             "presenter" => "ReverseProxy",
@@ -37,9 +38,8 @@ class RouterFactory
             "presenter" => "ReverseProxy",
             "action" => "byKeyword"
         ]);
-        $router[] = new Route("{$protocol}{$domains["primary"]}/", [
-            "presenter" => "ReverseProxy",
-            "action" => "homepage"
+        $router[] = new Route("{$protocol}api.{$domains["primary"]}/<action>/?sk=<secret_key>", [
+            "presenter" => "Api"
         ]);
 
         return $router;
