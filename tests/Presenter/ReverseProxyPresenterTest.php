@@ -10,23 +10,9 @@ use PetrKnap\Web\Test\NetteTestCase;
 
 class ReverseProxyPresenterTest extends NetteTestCase
 {
-    /**
-     * @dataProvider dataPresenterWorks
-     * @param string|null $url
-     * @param bool|null $isRedirect
-     * @param mixed $expected
-     * @runInSeparateProcess
-     */
-    public function testPresenterWorks($url, $isRedirect, $expected)
+    public function testHomepageWorks()
     {
-        if ($expected instanceof \Exception) {
-            $this->setExpectedException(get_class($expected));
-        }
-
-        $response = $this->runPresenter("ReverseProxy", "default", [
-            "url" => $url,
-            "is_redirect" => $isRedirect
-        ]);
+        $response = $this->runPresenter("ReverseProxy", "homepage");
 
         /** @var CallbackResponse $response */
         $this->assertInstanceOf(CallbackResponse::class, $response);
@@ -47,38 +33,12 @@ class ReverseProxyPresenterTest extends NetteTestCase
         $content = ob_get_contents();
         ob_end_clean();
 
-        if ($isRedirect) {
-            $this->assertArraySubset([
-                null => Response::S301_MOVED_PERMANENTLY,
-                "Location" => $expected
-            ], $headers);
-        } else {
-            if (isset($expected[0])) {
-                $this->assertContains($expected[0], $content);
-            }
-            if (isset($expected[1])) {
-                $this->assertArraySubset($expected[1], $headers);
-            }
-        }
+        $this->assertContains("<html>", $content);
+        $this->assertArraySubset(["Content-Type" => "text/html; charset=utf-8"], $headers);
     }
 
-    public function dataPresenterWorks()
+    public function testByKeywordWorks()
     {
-        /** @noinspection SpellCheckingInspection */
-        return [
-            [null, null, new BadRequestException()],
-            [null, false, new BadRequestException()],
-            [null, true, new BadRequestException()],
-            "redirect" => [
-                "http://httpbin.org/html",
-                true,
-                "http://httpbin.org/html"
-            ],
-            "proxy" => [
-                "http://httpbin.org/html",
-                false,
-                ["<html>", ["Content-Type" => "text/html; charset=utf-8"]]
-            ],
-        ];
+        $this->markTestIncomplete("To do"); // TODO
     }
 }

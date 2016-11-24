@@ -11,7 +11,7 @@ class NetteBootstrap extends Bootstrap
      */
     public static function isProduction()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -19,6 +19,6 @@ class NetteBootstrap extends Bootstrap
      */
     protected function getConfigFiles()
     {
-        return array_merge(parent::getConfigFiles(), []);
+        return array_merge(parent::getConfigFiles(), [__DIR__ . "/config.neon"]);
     }
 }

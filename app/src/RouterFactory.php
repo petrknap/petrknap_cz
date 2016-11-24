@@ -9,21 +9,37 @@ use Nette\Application\Routers\RouteList;
 class RouterFactory
 {
     /**
-     * @param string $homepage
-     * @param string $primarySecondLevelDomain
+     * @param string[] $domains
      * @return IRouter
      */
-    public static function createRouter($homepage, $primarySecondLevelDomain)
+    public static function createRouter(array $domains)
     {
         $protocol = Bootstrap::isProduction() ? "https://" : "http://";
-        $protocol .= "[test.%sld%.%tld%/]"; // enable test sub-domain
 
         $router = new RouteList();
 
-        $router[] = new Route("{$protocol}{$primarySecondLevelDomain}.%tld%/", [
+        $router[] = new Route("{$protocol}{$domains["primary"]}/", [
             "presenter" => "ReverseProxy",
-            "action" => "default",
-            "url" => $homepage
+            "action" => "homepage"
+        ]);
+        $router[] = new Route("http://{$domains["link"]}/to/<keyword .*>.<extension [^/]*>", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
+        $router[] = new Route("http://{$domains["link"]}/to/<keyword .*>/", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
+        $router[] = new Route("{$protocol}link.{$domains["primary"]}/to/<keyword .*>.<extension [^/]*>", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
+        $router[] = new Route("{$protocol}link.{$domains["primary"]}/to/<keyword .*>/", [
+            "presenter" => "ReverseProxy",
+            "action" => "byKeyword"
+        ]);
+        $router[] = new Route("{$protocol}api.{$domains["primary"]}/<action>/?sk=<secret_key>", [
+            "presenter" => "Api"
         ]);
 
         return $router;

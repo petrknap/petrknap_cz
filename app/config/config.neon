@@ -1,10 +1,24 @@
 parameters:
+    domains:
+        primary: "petrknap.%%tld%%"
+        link: "link.petrknap.dev"  # override me
+    secretKey: null
+    homepage: https://petrknap.github.io/index_cz.html
     curl:
         userAgent: "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:45.0) Gecko/20100101 Firefox/45.0"
         referrer: "" # HTTPS referrer (f.e. google)
         connectionTimeOut: 5000
         followLocation: true
         cookieFile: %appDir%/../temp/cookies.txt
+    cron:
+        -
+            class: PetrKnap\Web\Service\UrlLookupService
+            method: persistTouches
+            hours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+    database:
+        dsn: null
+        username: null
+        password: null
     reverseProxy:
         cache:
             expire: 24 hours
@@ -20,10 +34,22 @@ extensions:
     profiler: Netpromotion\Profiler\Extension\ProfilerNetteExtension
 
 
+database:
+    default:
+        dsn: %database.dsn%
+        user: %database.username%
+        password: %database.password%
+        debugger: true
+        explain: true
+        autowired: true
+
+
 profiler:
     profile:
         createService: true
-
+    bar:
+        show:
+            shortProfiles: false
 
 tracy:
     email: dev@petrknap.cz
@@ -31,5 +57,8 @@ tracy:
 
 services:
     - PetrKnap\Web\Common\CurlFactory(%curl%)
+    - PetrKnap\Web\Service\CronService(%cron%)
+    - PetrKnap\Web\Service\MigrationService
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
-    router: PetrKnap\Web\RouterFactory::createRouter("https://petrknap.github.io/index_cz.html", "petrknap")
+    - PetrKnap\Web\Service\UrlLookupService
+    router: PetrKnap\Web\RouterFactory::createRouter(%domains%)

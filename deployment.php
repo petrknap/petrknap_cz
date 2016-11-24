@@ -55,7 +55,7 @@ return [
                 "/.docker",
                 "/.idea",
                 "/.git*",
-                "/config/config.local.neon",
+                "/app/config/config.local.neon",
                 "/vendor/bin",
                 "/vendor/dg/ftp-deployment", // development
                 "/vendor/phpunit/*", // development
