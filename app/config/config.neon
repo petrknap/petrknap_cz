@@ -1,4 +1,7 @@
 parameters:
+    domains:
+        primary: "petrknap.%%tld%%"
+        link: "link.petrknap.dev"  # override me
     secretKey: null
     homepage: https://petrknap.github.io/index_cz.html
     curl:
@@ -58,4 +61,4 @@ services:
     - PetrKnap\Web\Service\MigrationService
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)
     - PetrKnap\Web\Service\UrlLookupService
-    router: PetrKnap\Web\RouterFactory::createRouter("petrknap")
+    router: PetrKnap\Web\RouterFactory::createRouter(%domains%)
