@@ -62,8 +62,9 @@ return [
                 "/tests"
             ],
             [
-                "log",
-                "temp"
+                "/storage.petrknap.cz/KeePass",
+                "/log",
+                "/temp"
             ]
         ),
         "allowDelete" => true,
