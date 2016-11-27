@@ -8,6 +8,8 @@ permission-update:
 	sudo find .                              -exec chown $$CURRENT_USER {} \;
 	sudo find .      -not -path "*/vendor/*" -type d -exec chmod 755 {} \;
 	sudo find .      -not -path "*/vendor/*" -type f -exec chmod 644 {} \;
+	sudo find ./backup                       -type d -exec chmod 777 {} \;
+	sudo find ./backup                       -type f -exec chmod 666 {} \;
 	sudo find ./log                          -type d -exec chmod 777 {} \;
 	sudo find ./log                          -type f -exec chmod 666 {} \;
 	sudo find ./temp                         -type d -exec chmod 777 {} \;
