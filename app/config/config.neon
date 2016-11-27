@@ -15,6 +15,10 @@ parameters:
             class: PetrKnap\Web\Service\UrlLookupService
             method: persistTouches
             hours: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+        -
+            class: PetrKnap\Web\Service\BackupService
+            method: backup
+            hours: [2, 6, 10, 14, 18, 22]
     database:
         dsn: null
         username: null
@@ -22,6 +26,12 @@ parameters:
     reverseProxy:
         cache:
             expire: 24 hours
+    backup:
+        destination: %appDir%/../backup
+        directories:
+            config:
+                path: %appDir%/config
+                limit: 10
 
 
 application:
@@ -57,6 +67,7 @@ tracy:
 
 services:
     - PetrKnap\Web\Common\CurlFactory(%curl%)
+    - PetrKnap\Web\Service\BackupService(%backup.destination%, %backup.directories%)
     - PetrKnap\Web\Service\CronService(%cron%)
     - PetrKnap\Web\Service\MigrationService
     - PetrKnap\Web\Service\ReverseProxyService(%reverseProxy%)

@@ -62,6 +62,7 @@ return [
                 "/tests"
             ],
             [
+                "/backup",
                 "/storage.petrknap.cz/KeePass",
                 "/log",
                 "/temp"
