@@ -65,7 +65,16 @@ class ReverseProxyPresenter extends Presenter
                     foreach ($this->reverseProxyService->getResponseHeaders($url) as $name => $value) {
                         $response->setHeader($name, $value);
                     }
-                    print($this->reverseProxyService->getResponseContent($url));
+                    if (substr($url, -3) == ".js") {
+                        $response->setContentType("application/javascript");
+                    } elseif (substr($url, -4) == ".css") {
+                        $response->setContentType("text/css");
+                    }
+                    $content = $this->reverseProxyService->getResponseContent($url);
+                    if (0 === strpos($content,"<!DOCTYPE")) {
+                        $response->setContentType("text/html");
+                    }
+                    print($content);
                 }
                 $response->setHeader("Connection", "close");
             }
